@@ -2,20 +2,15 @@ package com.callor.score.model;
 
 public class ScoreVO {
 
-	private String num;
 	private String name;
 	private Integer kor;
 	private Integer eng;
 	private Integer math;
 	private Integer sci;
 	private Integer his;
+	private Integer total;
+	private Float avg;
 	
-	public String getNum() {
-		return num;
-	}
-	public void setNum(String num) {
-		this.num = num;
-	}
 	public String getName() {
 		return name;
 	}
@@ -52,6 +47,13 @@ public class ScoreVO {
 	public void setHis(Integer his) {
 		this.his = his;
 	}
-	
+	public Integer getTotal() {
+		total = kor + eng + math + sci + his;
+		return total;
+	}
+	public Float getAvg() {
+		avg = (float)total / 5;
+		return avg;
+	}
 	
 }
