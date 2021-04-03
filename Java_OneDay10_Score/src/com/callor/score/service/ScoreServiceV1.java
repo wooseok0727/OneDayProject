@@ -33,7 +33,7 @@ public class ScoreServiceV1 {
 			if (select.equals("1")) {
 				this.inputName();
 			} else if (select.equals("2")) {
-				this.allPrintScore();
+				this.printListScore();
 			} else if (select.equals("QUIT")) {
 				return;
 			} else {
@@ -54,10 +54,10 @@ public class ScoreServiceV1 {
 		if (strName.equals("QUIT")) {
 			return;
 		}
-		this.addScore(strName);
+		this.inputScore(strName);
 	} // end inputNate()
 
-	private void addScore(String name) {
+	private void inputScore(String name) {
 		// TODO inputScore() 에서 입력된 학생 점수를 sVO객체에 추가하기
 		String[] subject = { "국어", "영어", "수학", "과학", "국사" };
 		Integer[] scores = new Integer[subject.length];
@@ -67,7 +67,7 @@ public class ScoreServiceV1 {
 		System.out.println("=".repeat(72));
 
 		for (int i = 0; i < subject.length; i++) {   // 과목수만큼 점수를 입력받아오기
-			scores[i] = this.inputScore(subject[i]);
+			scores[i] = this.inputSubjectScore(subject[i]);
 			if (scores[i] == null) {
 				return;
 			}
@@ -85,7 +85,7 @@ public class ScoreServiceV1 {
 		this.printScore(sVO);
 	} // end inputScore()
 
-	private Integer inputScore(String sub) {
+	private Integer inputSubjectScore(String sub) {
 		// TODO 과목 점수 입력받기
 		Integer score = 0;
 		while (true) {
@@ -121,7 +121,7 @@ public class ScoreServiceV1 {
 		System.out.println("국사 >> " + sVO.getHis());
 	} // end printScore()
 
-	private void allPrintScore() {
+	private void printListScore() {
 		// TODO 성적리스트 출력하기
 		System.out.println("=".repeat(72));
 		System.out.println("순번\t이름\t국어\t영어\t수학\t과학\t국사\t총점\t 평균");
@@ -138,10 +138,10 @@ public class ScoreServiceV1 {
 			System.out.print(vo.getTotal() + "\t ");
 			System.out.printf("%3.2f\n", vo.getAvg());
 		}
-		this.totalPrintScore();
+		this.printListTotalScore();
 	} // end allPrintScore()
 
-	private void totalPrintScore() {
+	private void printListTotalScore() {
 		// TODO 전체 리스트의 총점 평균 출력하기
 		int[] allTotal = new int[6];
 		float allTotalAvg = 0.0f;
