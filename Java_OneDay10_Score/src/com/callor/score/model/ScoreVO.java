@@ -48,7 +48,7 @@ public class ScoreVO {
 		this.his = his;
 	}
 	public Integer getTotal() {
-		total = kor + eng + math + sci + his;
+		this.total = this.kor + this.eng + this.math + this.sci + this.his;
 		return total;
 	}
 	public Float getAvg() {

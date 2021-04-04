@@ -54,10 +54,10 @@ public class ScoreServiceV1 {
 		if (strName.equals("QUIT")) {
 			return;
 		}
-		this.inputScore(strName);
+		this.addScore(strName);
 	} // end inputNate()
 
-	private void inputScore(String name) {
+	private void addScore(String name) {
 		// TODO inputScore() 에서 입력된 학생 점수를 sVO객체에 추가하기
 		String[] subject = { "국어", "영어", "수학", "과학", "국사" };
 		Integer[] scores = new Integer[subject.length];
