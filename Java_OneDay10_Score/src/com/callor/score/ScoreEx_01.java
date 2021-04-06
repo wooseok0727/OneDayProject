@@ -8,5 +8,7 @@ public class ScoreEx_01 {
 		
 		ScoreServiceV1 ssV1 = new ScoreServiceV1();
 		ssV1.selectMenu();
+		
+		
 	}
 }
