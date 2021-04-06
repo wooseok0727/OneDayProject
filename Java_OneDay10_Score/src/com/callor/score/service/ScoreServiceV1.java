@@ -17,7 +17,7 @@ public class ScoreServiceV1 {
 		scoreList = new ArrayList<ScoreVO>();
 	}
 
-	public void menuScore() {
+	public void selectMenu() {
 		// TODO 메뉴화면
 		while (true) {
 			System.out.println("=".repeat(72));
@@ -30,11 +30,11 @@ public class ScoreServiceV1 {
 			System.out.print("업무선택 >> ");
 
 			String select = scan.nextLine();
-			if (select.equals("1")) {
+			if (select.trim().equals("1")) {
 				this.inputName();
-			} else if (select.equals("2")) {
+			} else if (select.trim().equals("2")) {
 				this.printListScore();
-			} else if (select.equals("QUIT")) {
+			} else if (select.trim().equals("QUIT")) {
 				return;
 			} else {
 				System.out.println("1~2, 또는 QUIT 만 선택할 수 있습니다.");
@@ -51,7 +51,7 @@ public class ScoreServiceV1 {
 		System.out.println("=".repeat(72));
 		System.out.print("이름 >> ");
 		String strName = scan.nextLine();
-		if (strName.equals("QUIT")) {
+		if (strName.trim().equals("QUIT")) {
 			return;
 		}
 		this.addScore(strName);
@@ -91,11 +91,11 @@ public class ScoreServiceV1 {
 		while (true) {
 			System.out.print(sub + " >> ");
 			String strScore = scan.nextLine();
-			if (strScore.equals("QUIT")) {
+			if (strScore.trim().equals("QUIT")) {
 				return null;
 			}
 			try {
-				score = Integer.valueOf(strScore);
+				score = Integer.valueOf(strScore.trim());
 			} catch (Exception e) {
 				System.out.println("0 ~ 100까지 숫자만 입력하세요");
 				continue;
