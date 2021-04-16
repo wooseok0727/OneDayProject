@@ -85,7 +85,6 @@ public class UserServiceImplV1 implements UserService {
 				buffer = new BufferedReader(fileReader);
 
 				String reader = buffer.readLine();
-				if(reader == null) break;
 				String[] nums = reader.split(":");
 				UserVO userVO = new UserVO();
 				userVO.setScore(Integer.valueOf(nums[점수]));
@@ -95,6 +94,7 @@ public class UserServiceImplV1 implements UserService {
 				buffer.close();
 				System.out.println("불러오기 완료");
 				return userVO;
+				
 			} catch (FileNotFoundException e) {
 				System.out.println("파일을 찾을 수 없습니다");
 				continue;
@@ -103,6 +103,5 @@ public class UserServiceImplV1 implements UserService {
 				continue;
 			}
 		} // end while()
-		return null;
 	}
 }
