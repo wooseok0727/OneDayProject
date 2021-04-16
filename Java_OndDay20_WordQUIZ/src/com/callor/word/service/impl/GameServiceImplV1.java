@@ -18,7 +18,6 @@ import com.wooseok.standard.MenuService;
 import com.wooseok.standard.impl.MenuServiceImplV1;
 
 public class GameServiceImplV1 implements GameService {
-	
 	protected MenuService menuService;
 	protected UserService userService;
 	protected String engWord;
@@ -34,7 +33,6 @@ public class GameServiceImplV1 implements GameService {
 	protected final int 한글 = 1;
 	
 	public GameServiceImplV1() {
-		
 		userService = new UserServiceImplV1();
 		engWord = new String();
 		korWord = new String();
@@ -70,8 +68,8 @@ public class GameServiceImplV1 implements GameService {
 			} else if(menu == 3) {
 				this.loadScore();
 			}
-		}
-	}
+		} // end while()
+	} // end selectMenu()
 
 	@Override
 	public void viewWord() {
@@ -91,8 +89,9 @@ public class GameServiceImplV1 implements GameService {
 			System.out.println("* 현재 점수 : " + this.score);
 			System.out.println("* 맞힌 횟수 : " + this.winCount);
 			System.out.println("* 틀린 횟수 : " + this.loseCount);
-		}
-	}
+		} // end while()
+	} // end viewWord()
+	
 	protected Integer selectHintPass() {
 		// TODO 건너뛰기 및 힌트
 		while(true) {
@@ -101,25 +100,25 @@ public class GameServiceImplV1 implements GameService {
 			System.out.print(">> ");
 			String strInput = scan.nextLine();
 			if(strInput.equals("QUIT")) {		// QUIT null 값을 보내기위해서 메소드 반환형을 Integer로 사용하였다
-				return null;					// 이 메서드에서 return 0;은 return; 이랑 같다 == 정상완료되었다
-			} else if(strInput.equals("1")) {   // Integer형이라서 return;을 사용하지못하기 때문
-				this.score--;					// 어차피 위의 viewWord() 는 null값만 확인하면 된다
-				return 0;						
+				return null;		// 이 메서드에서 return 0;은 return; 이랑 같다 == 정상완료되었다
+			} else if(strInput.equals("1")) {		// Integer형이라서 return;을 사용하지못하기 때문
+				this.score--;		// 어차피 위의 viewWord() 는 null값만 확인하면 된다
+				return 0;
+				
 			} else if(strInput.equals("2")) {   
 				if(this.score <= 0) {           
 					System.out.println("* 현재점수 : " + this.score);
 					System.out.println("* 0점 이하는 힌트를 주지 않습니다");
 					continue;
 				}
-				this.score--;
+				this.score--; // 힌트
 				System.out.println("-".repeat(50));
 				System.out.println("* 현재점수 : " + this.score);
 				System.out.println("* 힌트 : " + this.korWord);
 				System.out.println("* 남은 기회 :" + nCount);
-				
 				continue;
 				
-			} else if(strInput.equalsIgnoreCase(this.engWord)) {
+			} else if(strInput.equalsIgnoreCase(this.engWord)) { // 정답
 				this.score++;
 				this.winCount++;
 				System.out.println("-".repeat(50));
@@ -128,7 +127,7 @@ public class GameServiceImplV1 implements GameService {
 				System.out.println("* 한글 뜻" + this.korWord);
 				return 0;
 				
-			} else {
+			} else { // 틀린경우
 				this.score--;
 				this.loseCount++;
 				this.nCount--;
@@ -147,7 +146,6 @@ public class GameServiceImplV1 implements GameService {
 	
 	protected WordVO getWord() {
 		// TODO 단어 1개 무작위로 뽑기
-		
 		int nSize = wordList.size(); 
 		int num = rnd.nextInt(nSize);
 		WordVO vo = wordList.get(num);
@@ -160,8 +158,8 @@ public class GameServiceImplV1 implements GameService {
 		WordVO word = this.getWord();
 		this.engWord = word.getEnglish();
 		this.korWord = word.getKorea();
-		String[] rndEng = this.engWord.split("");
 		
+		String[] rndEng = this.engWord.split("");
 		for(int i = 0; i < 50; i++) {
 			
 			int index1 = rnd.nextInt(rndEng.length);
@@ -177,11 +175,9 @@ public class GameServiceImplV1 implements GameService {
 	@Override
 	public void loadWord() {
 		// TODO 단어파일 읽어오기
-		
 		String fileName = "src/com/callor/word/word.txt";
 		FileReader fileReader = null;
 		BufferedReader buffer = null;
-		
 		try {
 			fileReader = new FileReader(fileName);
 			buffer = new BufferedReader(fileReader);
@@ -196,7 +192,6 @@ public class GameServiceImplV1 implements GameService {
 				wordList.add(wordVO);
 			}
 			buffer.close();
-			
 		} catch (FileNotFoundException e) {
 			System.out.println("파일을 찾을 수 없습니다");
 		} catch (IOException e) {
@@ -207,19 +202,16 @@ public class GameServiceImplV1 implements GameService {
 	@Override
 	public void saveScore() {
 		// TODO 유저 점수 저장하기
-		
 		UserVO userVO = new UserVO();
 		userVO.setScore(this.score);
 		userVO.setWinCount(this.winCount);
 		userVO.setLoseCount(this.loseCount);
-		
 		userService.saveUserInfo(userVO); // userVO 에 담긴 유저정보 userService 클래스로 보내기
 	}
 
 	@Override
 	public void loadScore() {
 		// TODO 유저 점수 불러오기
-		
 		UserVO userVO = userService.loadUserInfo(); // userService 클래스에서 userVO 에 담길 유저정보 가져오기
 		if(userVO == null) return;
 		this.score = userVO.getScore();

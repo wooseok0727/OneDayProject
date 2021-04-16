@@ -12,23 +12,19 @@ import com.callor.word.model.UserVO;
 import com.callor.word.service.UserService;
 
 public class UserServiceImplV1 implements UserService {
-
 	protected Scanner scan;
 	protected final int 점수 = 0;
 	protected final int 맞힌횟수 = 1;
 	protected final int 틀린횟수 = 2;
 
 	public UserServiceImplV1() {
-
 		scan = new Scanner(System.in);
 	}
 
 	@Override
 	public void saveUserInfo(UserVO vo) { // GameService 에서 넘어온 UserVO 형 정보 저장하기
 		// TODO 유저정보 파일로 저장하기
-		
 		String fileName = null;
-		
 		while (true) {
 			System.out.println("저장할 파일이름을 입력해주세요(QUIT:종료)");
 			System.out.print(">> ");
@@ -46,7 +42,6 @@ public class UserServiceImplV1 implements UserService {
 		String fileName1 = "src/com/callor/word/" + fileName + ".txt";
 		FileWriter fileWriter = null;
 		PrintWriter out = null;
-
 		try {
 			fileWriter = new FileWriter(fileName1);
 			out = new PrintWriter(fileWriter);
@@ -67,10 +62,8 @@ public class UserServiceImplV1 implements UserService {
 	@Override
 	public UserVO loadUserInfo() { //
 		// TODO 유저정보 파일에서 불러오기
-		
 		FileReader fileReader = null;
 		BufferedReader buffer = null;
-
 		while(true) {
 			System.out.println("불러올 파일이름을 입력하세요(QUIT:입력종료)");
 			System.out.print(">> ");
@@ -79,7 +72,6 @@ public class UserServiceImplV1 implements UserService {
 				return null;
 			}
 			String strFileName = "src/com/callor/word/" + fileName + ".txt";
-							
 			try {
 				fileReader = new FileReader(strFileName);
 				buffer = new BufferedReader(fileReader);
@@ -103,5 +95,5 @@ public class UserServiceImplV1 implements UserService {
 				continue;
 			}
 		} // end while()
-	}
+	} // end loadUserInfo()
 }
