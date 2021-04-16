@@ -19,8 +19,8 @@ import com.wooseok.standard.impl.MenuServiceImplV1;
 
 public class GameServiceImplV1 implements GameService {
 	
-	MenuService menuService;
-	UserService uService;
+	protected MenuService menuService;
+	protected UserService userService;
 	protected String engWord;
 	protected String korWord;
 	protected List<WordVO> wordList;
@@ -35,7 +35,7 @@ public class GameServiceImplV1 implements GameService {
 	
 	public GameServiceImplV1() {
 		
-		uService = new UserServiceImplV1();
+		userService = new UserServiceImplV1();
 		engWord = new String();
 		korWord = new String();
 		wordList = new ArrayList<WordVO>();
@@ -93,7 +93,7 @@ public class GameServiceImplV1 implements GameService {
 			System.out.println("* 틀린 횟수 : " + this.loseCount);
 		}
 	}
-	public Integer selectHintPass() {
+	protected Integer selectHintPass() {
 		// TODO 건너뛰기 및 힌트
 		while(true) {
 			System.out.println("=".repeat(50));
@@ -145,8 +145,7 @@ public class GameServiceImplV1 implements GameService {
 		} // end while()
 	}
 	
-	@Override
-	public WordVO getWord() {
+	protected WordVO getWord() {
 		// TODO 단어 1개 무작위로 뽑기
 		
 		int nSize = wordList.size();
@@ -155,8 +154,7 @@ public class GameServiceImplV1 implements GameService {
 		return vo;
 	}
 	
-	@Override
-	public String[] splitRandomWord() {
+	protected String[] splitRandomWord() {
 		// TODO 영단어 알파벳 순서 섞기
 		
 		WordVO word = this.getWord();
@@ -208,21 +206,21 @@ public class GameServiceImplV1 implements GameService {
 
 	@Override
 	public void saveScore() {
-		// TODO 현재 유저 점수 저장하기
+		// TODO 유저 점수 저장하기
 		
 		UserVO userVO = new UserVO();
 		userVO.setScore(this.score);
 		userVO.setWinCount(this.winCount);
 		userVO.setLoseCount(this.loseCount);
 		
-		uService.saveUserInfo(userVO);
+		userService.saveUserInfo(userVO);
 	}
 
 	@Override
 	public void loadScore() {
-		// TODO 불러온 유저 점수 적용하기
+		// TODO 유저 점수 불러오기
 		
-		UserVO userVO = uService.loadUserInfo();
+		UserVO userVO = userService.loadUserInfo();
 		if(userVO == null) return;
 		this.score = userVO.getScore();
 		this.winCount = userVO.getWinCount();
