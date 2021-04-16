@@ -24,7 +24,7 @@ public class UserServiceImplV1 implements UserService {
 	}
 
 	@Override
-	public void saveUserInfo(UserVO vo) {
+	public void saveUserInfo(UserVO vo) { // GameService 에서 넘어온 UserVO 형 정보 저장하기
 		// TODO 유저정보 파일로 저장하기
 		
 		String fileName = null;
@@ -65,7 +65,7 @@ public class UserServiceImplV1 implements UserService {
 	} // end saveUserInfo()
 
 	@Override
-	public UserVO loadUserInfo() {
+	public UserVO loadUserInfo() { //
 		// TODO 유저정보 파일에서 불러오기
 		
 		FileReader fileReader = null;
@@ -93,7 +93,7 @@ public class UserServiceImplV1 implements UserService {
 				
 				buffer.close();
 				System.out.println("불러오기 완료");
-				return userVO;
+				return userVO;  // UserVO형 userVO 객체정보를 호출한 GameService로 넘겨주기
 				
 			} catch (FileNotFoundException e) {
 				System.out.println("파일을 찾을 수 없습니다");

@@ -41,17 +41,17 @@ public class GameServiceImplV1 implements GameService {
 		wordList = new ArrayList<WordVO>();
 		scan = new Scanner(System.in);
 		rnd = new Random();
-		score = 10;
+		score = 10; // 플레이어 시작 점수
 		winCount = 0;
 		loseCount = 0;
-		nCount = 3;
+		nCount = 3; // 재도전 횟수
 		
 		this.loadWord();
 	}
 	
 	@Override
 	public void selectMenu() {
-		// TODO 시작메뉴
+		// TODO 시작메뉴 나만의 JDK를 활용
 		List<String> menuList = new ArrayList<String>();
 		menuList.add("게임 시작하기");
 		menuList.add("점수 저장하기");
@@ -83,7 +83,7 @@ public class GameServiceImplV1 implements GameService {
 			System.out.println();
 			String[] engWord = this.splitRandomWord();
 			System.out.println(Arrays.toString(engWord));
-			Integer select = this.selectHintPass();
+			Integer select = this.selectHintPass();  // selectHintPass() 에서 게임규칙 실행
 			if(select == null) {
 				return;
 			}
@@ -100,13 +100,13 @@ public class GameServiceImplV1 implements GameService {
 			System.out.println("[1. 건너뛰기] [2. 힌트보기] (점수 : -1 차감)");
 			System.out.print(">> ");
 			String strInput = scan.nextLine();
-			if(strInput.equals("QUIT")) {
-				return null;
-			} else if(strInput.equals("1")) {
-				this.score--;
-				return 0;
-			} else if(strInput.equals("2")) {
-				if(this.score <= 0) {
+			if(strInput.equals("QUIT")) {		// QUIT null 값을 보내기위해서 메소드 반환형을 Integer로 사용하였다
+				return null;					// 이 메서드에서 return 0;은 return; 이랑 같다 == 정상완료되었다
+			} else if(strInput.equals("1")) {   // Integer형이라서 return;을 사용하지못하기 때문
+				this.score--;					// 어차피 위의 viewWord() 는 null값만 확인하면 된다
+				return 0;						
+			} else if(strInput.equals("2")) {   
+				if(this.score <= 0) {           
 					System.out.println("* 현재점수 : " + this.score);
 					System.out.println("* 0점 이하는 힌트를 주지 않습니다");
 					continue;
@@ -135,7 +135,7 @@ public class GameServiceImplV1 implements GameService {
 				if(nCount == 0) {
 					System.out.println("-".repeat(50));
 					System.out.println("* 기회 소진!!");
-					this.nCount = 3;
+					this.nCount = 3;  // 재도전이 끝나고 다음단어로 넘어가기전 다시 재도전 3회 충전
 					return 0;
 				}
 				System.out.println("-".repeat(50));
@@ -148,7 +148,7 @@ public class GameServiceImplV1 implements GameService {
 	protected WordVO getWord() {
 		// TODO 단어 1개 무작위로 뽑기
 		
-		int nSize = wordList.size();
+		int nSize = wordList.size(); 
 		int num = rnd.nextInt(nSize);
 		WordVO vo = wordList.get(num);
 		return vo;
@@ -156,7 +156,7 @@ public class GameServiceImplV1 implements GameService {
 	
 	protected String[] splitRandomWord() {
 		// TODO 영단어 알파벳 순서 섞기
-		
+		// Java_006_Application/.../App_11.java 로또6개뽑기 시간에 배운것
 		WordVO word = this.getWord();
 		this.engWord = word.getEnglish();
 		this.korWord = word.getKorea();
@@ -213,14 +213,14 @@ public class GameServiceImplV1 implements GameService {
 		userVO.setWinCount(this.winCount);
 		userVO.setLoseCount(this.loseCount);
 		
-		userService.saveUserInfo(userVO);
+		userService.saveUserInfo(userVO); // userVO 에 담긴 유저정보 userService 클래스로 보내기
 	}
 
 	@Override
 	public void loadScore() {
 		// TODO 유저 점수 불러오기
 		
-		UserVO userVO = userService.loadUserInfo();
+		UserVO userVO = userService.loadUserInfo(); // userService 클래스에서 userVO 에 담길 유저정보 가져오기
 		if(userVO == null) return;
 		this.score = userVO.getScore();
 		this.winCount = userVO.getWinCount();
