@@ -9,5 +9,7 @@ public class WordQuiz {
 		
 		GameService gameService = new GameServiceImplV1();
 		gameService.selectMenu();
+		
+		
 	}
 }
