@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>식품명을 입력하세요</h1>
-	<form method="POST">
+	<form action="select">
 		<input name="f_name"/>
 		<button>검색</button>
 	</form>

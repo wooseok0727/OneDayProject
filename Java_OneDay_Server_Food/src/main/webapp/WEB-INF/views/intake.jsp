@@ -8,11 +8,14 @@
 </head>
 <body>
 	<h1>섭취정보를 입력하세요</h1>
+	<form  action="search">
+	<button>식품명 검색</button>
+	</form>
 	<form method="POST">
-		<p><input name="mf_date"/>
-		<p><input name="mf_name" value="${MFPCODE.mf_pcode}">
-		<a href="intake?id=search">식품 검색</a>
-		<p><input name="mf_intake"/>
+		<p>날짜 <input name="mf_date"/>
+		<p>식품코드<input name="mf_code" value="${FCODE}">
+		<p>식품명 <input name="mf_name" value="${FNAME}"> 
+		<p>섭취량 <input name="mf_intake"/>
 		<button>등록</button>
 	</form>
 </body>

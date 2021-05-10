@@ -27,7 +27,11 @@ public class LookupController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		req.getRequestDispatcher("WEB-INF/views/lookup.jsp").forward(req, resp);
+		String subPath = req.getPathInfo();
+		
+		if(subPath.equals("/list")) {
+			req.getRequestDispatcher("/WEB-INF/views/lookup.jsp").forward(req, resp);
+		}
 	}
 
 	@Override

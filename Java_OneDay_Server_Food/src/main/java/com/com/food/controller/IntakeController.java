@@ -3,6 +3,7 @@ package com.com.food.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,46 +23,46 @@ public class IntakeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected FoodService fService;
 	protected MyFoodService mfService;
-	
+	protected List<FoodDTO> fList;
+
 	public IntakeController() {
-		
+
 		fService = new FoodServiceImplV1();
 		mfService = new MyFoodServiceImplV1();
+
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String subPath = req.getContextPath();
-		if(subPath.equals("/food")) { 
-			String mf_pcode = req.getParameter("f_code");
-			req.setAttribute("MFPCODE", mf_pcode);
+
+		String subPath = req.getPathInfo();
+		if (subPath.equals("/add")) {
+			String f_code = req.getParameter("f_code");
+			String f_name = req.getParameter("f_name");
+			req.setAttribute("FCODE", f_code);
+			req.setAttribute("FNAME", f_name);
 			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
-		} else {
-			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
+		} else if (subPath.equals("/search")) {
+			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
+		} else if (subPath.equals("/select")) {
+			String f_name = req.getParameter("f_name");
+			fList = fService.findByFname(f_name);
+			req.setAttribute("FLIST", fList);
+			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setCharacterEncoding("UTF-8");
-		
-		String f_name = req.getParameter("f_name");
-		List<FoodDTO> fList = fService.findByFname(f_name);
-		
-		req.setAttribute("FLIST", fList);
-		req.getRequestDispatcher("WEB-INF/views/intake3.jsp").forward(req, resp);
-		
+
 		String mf_date = req.getParameter("mf_date");
-		String mf_name = req.getParameter("mf_name");
+		String mf_code = req.getParameter("mf_code");
 		Integer mf_intake = Integer.valueOf(req.getParameter("mf_intake"));
-		
+
 		MyFoodVO myfoodVO = new MyFoodVO();
 		myfoodVO.setMf_date(mf_date);
-		myfoodVO.setMf_pcode(mf_name);
+		myfoodVO.setMf_pcode(mf_code);
 		myfoodVO.setMf_intake(mf_intake);
-		
 		int result = mfService.insert(myfoodVO);
 		if (result > 0) {
 			resp.sendRedirect("/food");

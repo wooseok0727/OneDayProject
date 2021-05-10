@@ -31,7 +31,7 @@
 		<ul>
 			<li><strong><a href="/food">HOME 으로 돌아가기</a></strong>		
 		</ul>
-	</nav>		
+		</nav>		
 
 </body>
 </html>

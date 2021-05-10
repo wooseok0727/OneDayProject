@@ -70,7 +70,7 @@ public class FoodServiceImplV1 implements FoodService {
 		// TODO Auto-generated method stub
 		String sql = " SELECT * FROM view_식품정보 ";
 		sql += " WHERE " + DBInfo.FOOD.f_name;
-		sql += " LIKE '%' || ? '%' ";
+		sql += " LIKE '%' || ? || '%' ";
 
 		pStr = null;
 		try {
