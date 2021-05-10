@@ -8,9 +8,9 @@
 </head>
 <body>
 	<h1>식품명을 입력하세요</h1>
-	<form action="select">
-		<input name="f_name"/>
-		<button>검색</button>
+	<form method="POST">
+		<input name="mf_name"/>
+		<button name="button" value="searchh">검색</button>
 	</form>
 </body>
 </html>

@@ -33,7 +33,7 @@
 	<nav>
 		<ul>
 			<li><strong><a href="intake/add">섭취정보 등록</a></strong>
-			<li><strong><a href="lookup/list">섭취정보 날짜조회</a></strong>		
+			<li><strong><a href="lookup">섭취정보 날짜조회</a></strong>		
 		</ul>
 	</nav>
 </body>

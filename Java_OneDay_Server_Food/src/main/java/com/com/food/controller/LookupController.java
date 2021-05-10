@@ -13,7 +13,7 @@ import com.com.food.model.MyFoodDTO;
 import com.com.food.service.MyFoodService;
 import com.com.food.service.impl.MyFoodServiceImplV1;
 
-@WebServlet("/lookup/*")
+@WebServlet("/lookup")
 public class LookupController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -27,11 +27,7 @@ public class LookupController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String subPath = req.getPathInfo();
-		
-		if(subPath.equals("/list")) {
 			req.getRequestDispatcher("/WEB-INF/views/lookup.jsp").forward(req, resp);
-		}
 	}
 
 	@Override

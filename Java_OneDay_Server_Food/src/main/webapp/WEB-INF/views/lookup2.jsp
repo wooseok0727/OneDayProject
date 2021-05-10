@@ -8,7 +8,7 @@
 <title>날짜별 섭취정보</title>
 </head>
 <body>
-	<h1>전체섭취정보 리스트</h1>
+	<h1>일별섭취정보 리스트</h1>
 			<table>
 			<tr>
 			<th>날짜</th><th>식품명</th><th>섭취량</th><th>총내용량</th><th>에너지(kcal)</th>

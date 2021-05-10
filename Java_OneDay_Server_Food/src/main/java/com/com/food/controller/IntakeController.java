@@ -33,7 +33,7 @@ public class IntakeController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String subPath = req.getPathInfo();
 		if (subPath.equals("/add")) {
 			String f_code = req.getParameter("f_code");
@@ -41,30 +41,39 @@ public class IntakeController extends HttpServlet {
 			req.setAttribute("FCODE", f_code);
 			req.setAttribute("FNAME", f_name);
 			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
-		} else if (subPath.equals("/search")) {
-			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
-		} else if (subPath.equals("/select")) {
-			String f_name = req.getParameter("f_name");
-			List<FoodDTO> fList = fService.findByFname(f_name);
-			req.setAttribute("FLIST", fList);
-			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String mf_date = req.getParameter("mf_date");
-		String mf_code = req.getParameter("mf_code");
-		Integer mf_intake = Integer.valueOf(req.getParameter("mf_intake"));
+		String button = req.getParameter("button");
 
-		MyFoodVO myfoodVO = new MyFoodVO();
-		myfoodVO.setMf_date(mf_date);
-		myfoodVO.setMf_pcode(mf_code);
-		myfoodVO.setMf_intake(mf_intake);
-		int result = mfService.insert(myfoodVO);
-		if (result > 0) {
-			resp.sendRedirect("/food");
+		if (button.equals("search")) {
+
+			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
+
+		} else if (button.equals("insert")) {
+
+			String mf_date = req.getParameter("mf_date");
+			String mf_code = req.getParameter("mf_code");
+			Integer mf_intake = Integer.valueOf(req.getParameter("mf_intake"));
+
+			MyFoodVO myfoodVO = new MyFoodVO();
+			myfoodVO.setMf_date(mf_date);
+			myfoodVO.setMf_pcode(mf_code);
+			myfoodVO.setMf_intake(mf_intake);
+			int result = mfService.insert(myfoodVO);
+			if (result > 0) {
+				resp.sendRedirect("/food");
+			}
+		} else if (button.equals("searchh")){
+			
+			String mf_name = req.getParameter("mf_name");
+			List<FoodDTO> fList = fService.findByFname(mf_name);
+			req.setAttribute("FLIST", fList);
+			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
 		}
+
 	}
 }
