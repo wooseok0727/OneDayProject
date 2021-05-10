@@ -16,15 +16,17 @@
 			</tr>
 	<C:if test="${empty MFLIST}"> 등록된 섭취정보가 없습니다</C:if>
 	<C:forEach items="${MFLIST}" var="MF">
-		<p><th>${MF.mf_date}</th>
-		   <th>${MF.f_name}</th>
-		   <th>${MF.mf_intake}</th>
-		   <th>${MF.mf_spc}</th>
-		   <th>${MF.mf_calories}</th>
-		   <th>${MF.mf_protein}</th>
-		   <th>${MF.mf_fat}</th>
-		   <th>${MF.mf_carbohydrate}</th>
-		   <th>${MF.mf_sugars}</th>
+		   <tr>		
+		   <td>${MF.mf_date}</td>
+		   <td>${MF.f_name}</td>
+		   <td>${MF.mf_intake}</td>
+		   <td>${MF.mf_spc}</td>
+		   <td>${MF.mf_calories}</td>
+		   <td>${MF.mf_protein}</td>
+		   <td>${MF.mf_fat}</td>
+		   <td>${MF.mf_carbohydrate}</td>
+		   <td>${MF.mf_sugars}</td>
+		   </tr>
 	</C:forEach>
 			</table>
 		<nav>

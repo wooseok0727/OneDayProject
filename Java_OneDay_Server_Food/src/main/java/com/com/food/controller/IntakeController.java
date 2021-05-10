@@ -23,7 +23,6 @@ public class IntakeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected FoodService fService;
 	protected MyFoodService mfService;
-	protected List<FoodDTO> fList;
 
 	public IntakeController() {
 
@@ -34,7 +33,7 @@ public class IntakeController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		String subPath = req.getPathInfo();
 		if (subPath.equals("/add")) {
 			String f_code = req.getParameter("f_code");
@@ -46,7 +45,7 @@ public class IntakeController extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
 		} else if (subPath.equals("/select")) {
 			String f_name = req.getParameter("f_name");
-			fList = fService.findByFname(f_name);
+			List<FoodDTO> fList = fService.findByFname(f_name);
 			req.setAttribute("FLIST", fList);
 			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
 		}
