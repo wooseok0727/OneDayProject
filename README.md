@@ -10,7 +10,7 @@
 * Java_OneDay20_WordQUIZ
 * Jva Console 단어퀴즈 프로젝트
 
-## JSP & DMBS 식품정보
+## JSP & DBMS 식품정보
 * 2021-05-10
 * Java_OneDay_Server_Food
 * JSP 식품영양정보 프로젝트
