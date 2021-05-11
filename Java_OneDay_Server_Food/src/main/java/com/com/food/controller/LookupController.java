@@ -28,7 +28,7 @@ public class LookupController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		String sdate = sd.format(date);
@@ -38,7 +38,7 @@ public class LookupController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String mf_year = req.getParameter("mf_date");
 		List<MyFoodDTO> mfList = mfService.findByDate(mf_year);
 		req.setAttribute("MFLIST", mfList);

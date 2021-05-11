@@ -18,15 +18,15 @@ public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	protected MyFoodService mfService;
-	
+
 	public HomeController() {
-		
+
 		mfService = new MyFoodServiceImplV1();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		List<MyFoodDTO> mfList = mfService.selectAll();
 		req.setAttribute("MFLIST", mfList);
 		req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);

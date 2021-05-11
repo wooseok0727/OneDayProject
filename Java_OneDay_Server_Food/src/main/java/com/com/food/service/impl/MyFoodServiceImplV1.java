@@ -17,18 +17,18 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 
 	protected Connection dbConn;
 	protected PreparedStatement pStr;
-	
+
 	public MyFoodServiceImplV1() {
-		
+
 		dbConn = DBContract.getDBConnection();
 	}
-	
+
 	public List<MyFoodDTO> select(PreparedStatement pStr) throws SQLException {
-		
+
 		List<MyFoodDTO> mfList = new ArrayList<>();
 		ResultSet rSet = pStr.executeQuery();
-		
-		while(rSet.next()) {
+
+		while (rSet.next()) {
 			MyFoodDTO myfoodDTO = new MyFoodDTO();
 			myfoodDTO.setMf_seq(rSet.getLong(DBInfo.MYFOOD.mf_seq));
 			myfoodDTO.setMf_date(rSet.getString(DBInfo.MYFOOD.mf_date));
@@ -45,12 +45,12 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 		rSet.close();
 		return mfList;
 	}
-	
+
 	@Override
 	public List<MyFoodDTO> selectAll() {
 		// TODO Auto-generated method stub
 		String sql = " SELECT * FROM view_식품섭취정보 ";
-		
+
 		pStr = null;
 		try {
 			pStr = dbConn.prepareStatement(sql);
@@ -68,7 +68,7 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 		// TODO Auto-generated method stub
 		String sql = " SELECT * FROM view_식품섭취정보 ";
 		sql += " WHERE " + DBInfo.MYFOOD.mf_date + " = ? ";
-		
+
 		pStr = null;
 		try {
 			pStr = dbConn.prepareStatement(sql);
@@ -88,7 +88,7 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 		String sql = " INSERT INTO tbl_myfoods ";
 		sql += "(mf_seq, mf_date, mf_pcode, mf_intake) ";
 		sql += " VALUES(seq_myfoods.NEXTVAL, ?, ?, ?) ";
-		
+
 		pStr = null;
 		try {
 			pStr = dbConn.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 	@Override
 	public int delete(Long seq) {
 		// TODO Auto-generated method stub
-		
+
 		return 0;
 	}
 }

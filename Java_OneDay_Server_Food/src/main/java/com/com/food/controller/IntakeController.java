@@ -48,10 +48,9 @@ public class IntakeController extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String button = req.getParameter("button");
-		
-		
+
 		if (button.equals("search")) {
-			
+
 			mf_sdate = req.getParameter("mf_date");
 			String f_name = req.getParameter("mf_name");
 			List<FoodDTO> fList = fService.findByFname(f_name);
