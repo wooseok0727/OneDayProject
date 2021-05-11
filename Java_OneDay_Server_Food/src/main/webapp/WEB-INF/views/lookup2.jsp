@@ -14,7 +14,7 @@
 			<th>날짜</th><th>식품명</th><th>섭취량</th><th>총내용량</th><th>에너지(kcal)</th>
 			<th>단백질(g)</th><th>지방(g)</th><th>탄수화물(g)</th><th>총당류(g)</th>
 			</tr>
-	<C:if test="${empty MFLIST}"> 등록된 섭취정보가 없습니다</C:if>
+	<p><C:if test="${empty MFLIST}"> 등록된 섭취정보가 없습니다</C:if>
 	<C:forEach items="${MFLIST}" var="MF">
 		   <tr>		
 		   <td>${MF.mf_date}</td>
@@ -29,11 +29,10 @@
 		   </tr>
 	</C:forEach>
 			</table>
-		<nav>
+	<nav>
 		<ul>
 			<li><strong><a href="/food">HOME 으로 돌아가기</a></strong>		
 		</ul>
-		</nav>		
-
+	</nav>		
 </body>
 </html>

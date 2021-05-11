@@ -68,6 +68,8 @@ CREATE TABLE tbl_myfoods(
     mf_intake	NUMBER	    NOT NULL	
 );
 
+DELETE FROM tbl_myfoods
+WHERE mf_date = '50';
 
 ALTER TABLE tbl_myfoods
 ADD CONSTRAINT fk_foods
@@ -82,9 +84,12 @@ INCREMENT BY 1;
 INSERT INTO tbl_myfoods
 VALUES(seq_myfoods.NEXTVAL,'2021-05-19','PD00001',3);
 
+DROP VIEW view_식품섭취정보;
+
 CREATE VIEW view_식품섭취정보 AS
 (
-    SELECT M.mf_date AS 날짜,
+    SELECT M.mf_seq AS SEQ,
+           M.mf_date AS 날짜,
            F.f_name AS 식품명,
            M.mf_intake AS 섭취량,
            M.mf_intake * F.f_spc AS 총내용량,

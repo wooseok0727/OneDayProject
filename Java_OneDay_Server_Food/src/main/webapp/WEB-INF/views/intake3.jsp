@@ -10,14 +10,13 @@
 <body>
 	<h1>식품정보 리스트</h1>
 	<C:if test="${empty FLIST}"> 검색결과가 없음</C:if>
-
 			<table>
 			<tr>
 			<th>식품명</th><th>출시연도</th><th>제조사명</th><th>분류명</th><th>1회제공량</th><th>에너지(kcal)</th>
 			<th>단백질(g)</th><th>지방(g)</th><th>탄수화물(g)</th><th>총당류(g)</th>
 			</tr>
 	<C:forEach items="${FLIST}" var="FOOD">
-			<form method="POST">
+		<form method="POST">
 		   <tr>
 		   <input type="hidden" name="f_code" value="${FOOD.f_code}"/>
 		   <input type="hidden" name="f_name" value="${FOOD.f_name}"/>
@@ -31,8 +30,8 @@
 		   <td>${FOOD.f_fat}</td>
 		   <td>${FOOD.f_carbohydrate}</td>
 		   <td>${FOOD.f_sugars}</td>
-		   	</tr>
-		   	</form>		   
+		   </tr>
+		 </form>		   
 	</C:forEach>
 			</table>
 

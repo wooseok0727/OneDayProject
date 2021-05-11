@@ -9,8 +9,16 @@
 <body>
 	<h4>조회하려는 날짜를 입력하세요</h4>
 	<form method="POST">
-		날짜 <input name="mf_date"/>
+		<input name="mf_year"/>년
+		<input name="mf_month"/>월
+		<input name="mf_day"/>일
 		<button>조회</button>
 	</form>
+	
+	<nav>
+		<ul>
+			<li><strong><a href="/food">HOME 으로 돌아가기</a></strong>		
+		</ul>
+	</nav>	
 </body>
 </html>

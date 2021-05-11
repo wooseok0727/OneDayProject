@@ -1,9 +1,10 @@
 package com.com.food.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ public class IntakeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected FoodService fService;
 	protected MyFoodService mfService;
+	protected String sdate;
 
 	public IntakeController() {
 
@@ -32,7 +34,11 @@ public class IntakeController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		sdate = sd.format(date);
+		req.setAttribute("FDATE", sdate);
 		req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
 	}
 
@@ -43,11 +49,27 @@ public class IntakeController extends HttpServlet {
 		String button = req.getParameter("button");
 
 		if (button.equals("search")) {
-
+			
 			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
 
-		} else if (button.equals("insert")) {
+		} else if (button.equals("search2")) {
 
+			String f_name = req.getParameter("f_name");
+			List<FoodDTO> fList = fService.findByFname(f_name);
+			req.setAttribute("FLIST", fList);
+			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
+
+		} else if (button.equals("select")) {
+			
+			String f_code = req.getParameter("f_code");
+			String f_name = req.getParameter("f_name");
+			req.setAttribute("FCODE", f_code);
+			req.setAttribute("FNAME", f_name);
+			req.setAttribute("FDATE", sdate);
+			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
+			
+		} else if (button.equals("insert")) {
+			
 			String mf_date = req.getParameter("mf_date");
 			String mf_code = req.getParameter("mf_code");
 			Integer mf_intake = Integer.valueOf(req.getParameter("mf_intake"));
@@ -60,22 +82,6 @@ public class IntakeController extends HttpServlet {
 			if (result > 0) {
 				resp.sendRedirect("/food");
 			}
-
-		} else if (button.equals("search2")) {
-
-			String f_name = req.getParameter("f_name");
-			List<FoodDTO> fList = fService.findByFname(f_name);
-			req.setAttribute("FLIST", fList);
-			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
-
-		} else if (button.equals("select")) {
-			
-			
-			String f_code = req.getParameter("f_code");
-			String f_name = req.getParameter("f_name");
-			req.setAttribute("FCODE", f_code);
-			req.setAttribute("FNAME", f_name);
-			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
 		}
 	}
 }

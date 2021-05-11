@@ -33,7 +33,16 @@ public class LookupController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String mf_date = req.getParameter("mf_date");
+		String mf_year = req.getParameter("mf_year");
+		String mf_month = null;
+		String mf_day = null;
+		try {
+			mf_month = String.format("%02d", Integer.valueOf(req.getParameter("mf_month")));
+			mf_day = String.format("%02d", Integer.valueOf(req.getParameter("mf_day")));
+		} catch (NumberFormatException e) {
+			req.getRequestDispatcher("/WEB-INF/views/lookup2.jsp").forward(req, resp);
+		}
+		String mf_date = String.format(mf_year + "-" + mf_month + "-" + mf_day);
 		List<MyFoodDTO> mfList = mfService.findByDate(mf_date);
 		req.setAttribute("MFLIST", mfList);
 		req.getRequestDispatcher("/WEB-INF/views/lookup2.jsp").forward(req, resp);

@@ -10,15 +10,15 @@
 <body>
 	<h1>전체섭취정보 리스트</h1>
 	<C:if test="${empty MFLIST}"> 등록된 섭취정보가 없습니다</C:if>
-			<table>
+		<table>
 			<tr>
 			<th>날짜</th><th>식품명</th><th>섭취량</th><th>총내용량</th>
 			<th>에너지(kcal)</th><th>단백질(g)</th><th>지방(g)</th>
 			<th>탄수화물(g)</th><th>총당류(g)</th>
 			</tr>
 	<C:forEach items="${MFLIST}" var="MF">
-		<tr>
-		<td>${MF.mf_date}</td>
+		   <tr>
+		   <td>${MF.mf_date}</td>
 		   <td>${MF.f_name}</td>
 		   <td>${MF.mf_intake}</ttd>
 		   <td>${MF.mf_spc}</td>

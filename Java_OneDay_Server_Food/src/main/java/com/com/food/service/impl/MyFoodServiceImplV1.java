@@ -114,5 +114,4 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }
