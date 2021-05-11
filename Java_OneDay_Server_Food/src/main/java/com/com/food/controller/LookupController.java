@@ -18,28 +18,24 @@ public class LookupController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	protected MyFoodService mfService;
-	
+
 	public LookupController() {
-		
+
 		mfService = new MyFoodServiceImplV1();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-			req.getRequestDispatcher("/WEB-INF/views/lookup.jsp").forward(req, resp);
+
+		req.getRequestDispatcher("/WEB-INF/views/lookup.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String mf_date = req.getParameter("mf_date");
 		List<MyFoodDTO> mfList = mfService.findByDate(mf_date);
 		req.setAttribute("MFLIST", mfList);
 		req.getRequestDispatcher("/WEB-INF/views/lookup2.jsp").forward(req, resp);
-		
-		
 	}
-	
-	
 }

@@ -17,7 +17,7 @@ import com.com.food.service.MyFoodService;
 import com.com.food.service.impl.FoodServiceImplV1;
 import com.com.food.service.impl.MyFoodServiceImplV1;
 
-@WebServlet("/intake/*")
+@WebServlet("/intake")
 public class IntakeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -28,25 +28,18 @@ public class IntakeController extends HttpServlet {
 
 		fService = new FoodServiceImplV1();
 		mfService = new MyFoodServiceImplV1();
-
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String subPath = req.getPathInfo();
-		if (subPath.equals("/add")) {
-			String f_code = req.getParameter("f_code");
-			String f_name = req.getParameter("f_name");
-			req.setAttribute("FCODE", f_code);
-			req.setAttribute("FNAME", f_name);
-			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
-		}
+		req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		req.setCharacterEncoding("UTF-8");
 		String button = req.getParameter("button");
 
 		if (button.equals("search")) {
@@ -67,13 +60,22 @@ public class IntakeController extends HttpServlet {
 			if (result > 0) {
 				resp.sendRedirect("/food");
 			}
-		} else if (button.equals("searchh")){
-			
-			String mf_name = req.getParameter("mf_name");
-			List<FoodDTO> fList = fService.findByFname(mf_name);
+
+		} else if (button.equals("search2")) {
+
+			String f_name = req.getParameter("f_name");
+			List<FoodDTO> fList = fService.findByFname(f_name);
 			req.setAttribute("FLIST", fList);
 			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
-		}
 
+		} else if (button.equals("select")) {
+			
+			
+			String f_code = req.getParameter("f_code");
+			String f_name = req.getParameter("f_name");
+			req.setAttribute("FCODE", f_code);
+			req.setAttribute("FNAME", f_name);
+			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
+		}
 	}
 }
