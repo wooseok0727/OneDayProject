@@ -1,6 +1,8 @@
 package com.com.food.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,24 +28,19 @@ public class LookupController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		String sdate = sd.format(date);
+		req.setAttribute("FDATE", sdate);
 		req.getRequestDispatcher("/WEB-INF/views/lookup.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String mf_year = req.getParameter("mf_year");
-		String mf_month = null;
-		String mf_day = null;
-		try {
-			mf_month = String.format("%02d", Integer.valueOf(req.getParameter("mf_month")));
-			mf_day = String.format("%02d", Integer.valueOf(req.getParameter("mf_day")));
-		} catch (NumberFormatException e) {
-			req.getRequestDispatcher("/WEB-INF/views/exception.jsp").forward(req, resp);
-		}
-		String mf_date = String.format(mf_year + "-" + mf_month + "-" + mf_day);
-		List<MyFoodDTO> mfList = mfService.findByDate(mf_date);
+		
+		String mf_year = req.getParameter("mf_date");
+		List<MyFoodDTO> mfList = mfService.findByDate(mf_year);
 		req.setAttribute("MFLIST", mfList);
 		req.getRequestDispatcher("/WEB-INF/views/lookup2.jsp").forward(req, resp);
 	}

@@ -25,6 +25,7 @@ public class IntakeController extends HttpServlet {
 	protected FoodService fService;
 	protected MyFoodService mfService;
 	protected String sdate;
+	protected String mf_sdate;
 
 	public IntakeController() {
 
@@ -47,9 +48,11 @@ public class IntakeController extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String button = req.getParameter("button");
-
+		
+		
 		if (button.equals("search")) {
-
+			
+			mf_sdate = req.getParameter("mf_date");
 			String f_name = req.getParameter("mf_name");
 			List<FoodDTO> fList = fService.findByFname(f_name);
 			req.setAttribute("FLIST", fList);
@@ -61,7 +64,7 @@ public class IntakeController extends HttpServlet {
 			String f_name = req.getParameter("f_name");
 			req.setAttribute("FCODE", f_code);
 			req.setAttribute("FNAME", f_name);
-			req.setAttribute("FDATE", sdate);
+			req.setAttribute("FDATE", mf_sdate);
 			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
 
 		} else if (button.equals("insert")) {

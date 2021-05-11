@@ -30,6 +30,7 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 		
 		while(rSet.next()) {
 			MyFoodDTO myfoodDTO = new MyFoodDTO();
+			myfoodDTO.setMf_seq(rSet.getLong(DBInfo.MYFOOD.mf_seq));
 			myfoodDTO.setMf_date(rSet.getString(DBInfo.MYFOOD.mf_date));
 			myfoodDTO.setF_name(rSet.getString(DBInfo.MYFOOD.f_name));
 			myfoodDTO.setMf_intake(rSet.getInt(DBInfo.MYFOOD.mf_intake));
@@ -112,6 +113,7 @@ public class MyFoodServiceImplV1 implements MyFoodService {
 	@Override
 	public int delete(Long seq) {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 }

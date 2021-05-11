@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class MyFoodDTO {
 
+	private Long mf_seq = 0L;				// SEQ			NUMBER
 	private String mf_date; 				// 날짜			CHAR(10)
 	private String f_name; 					// 식품명		NVARCHAR2(125)
 	private Integer mf_intake = 0; 			// 섭취량		NUMBER

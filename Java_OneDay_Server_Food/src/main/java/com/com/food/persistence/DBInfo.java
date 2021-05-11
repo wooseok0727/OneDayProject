@@ -20,6 +20,7 @@ public class DBInfo {
 	
 	public static class MYFOOD {
 		
+		public static final String mf_seq = "SEQ";
 		public static final String mf_date = "날짜";
 		public static final String f_name = "식품명";
 		public static final String mf_intake = "섭취량";

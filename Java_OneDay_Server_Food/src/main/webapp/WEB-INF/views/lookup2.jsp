@@ -11,12 +11,13 @@
 	<h1>일별섭취정보 리스트</h1>
 			<table>
 			<tr>
-			<th>날짜</th><th>식품명</th><th>섭취량</th><th>총내용량</th><th>에너지(kcal)</th>
+			<th>번호</th><th>날짜</th><th>식품명</th><th>섭취량</th><th>총내용량</th><th>에너지(kcal)</th>
 			<th>단백질(g)</th><th>지방(g)</th><th>탄수화물(g)</th><th>총당류(g)</th>
 			</tr>
 	<p><C:if test="${empty MFLIST}"> 등록된 섭취정보가 없습니다</C:if>
 	<C:forEach items="${MFLIST}" var="MF">
-		   <tr>		
+		   <tr>	
+		   <td>${MF.mf_seq}</td>	
 		   <td>${MF.mf_date}</td>
 		   <td>${MF.f_name}</td>
 		   <td>${MF.mf_intake}</td>
