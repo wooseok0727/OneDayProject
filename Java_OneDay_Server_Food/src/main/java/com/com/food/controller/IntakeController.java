@@ -34,7 +34,7 @@ public class IntakeController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		sdate = sd.format(date);
@@ -49,38 +49,41 @@ public class IntakeController extends HttpServlet {
 		String button = req.getParameter("button");
 
 		if (button.equals("search")) {
-			
-			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
 
-		} else if (button.equals("search2")) {
-
-			String f_name = req.getParameter("f_name");
+			String f_name = req.getParameter("mf_name");
 			List<FoodDTO> fList = fService.findByFname(f_name);
 			req.setAttribute("FLIST", fList);
-			req.getRequestDispatcher("/WEB-INF/views/intake3.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/intake2.jsp").forward(req, resp);
 
 		} else if (button.equals("select")) {
-			
+
 			String f_code = req.getParameter("f_code");
 			String f_name = req.getParameter("f_name");
 			req.setAttribute("FCODE", f_code);
 			req.setAttribute("FNAME", f_name);
 			req.setAttribute("FDATE", sdate);
 			req.getRequestDispatcher("/WEB-INF/views/intake.jsp").forward(req, resp);
-			
+
 		} else if (button.equals("insert")) {
-			
+
 			String mf_date = req.getParameter("mf_date");
 			String mf_code = req.getParameter("mf_code");
-			Integer mf_intake = Integer.valueOf(req.getParameter("mf_intake"));
+			Integer mf_intake = null;
+			try {
+				mf_intake = Integer.valueOf(req.getParameter("mf_intake"));
 
-			MyFoodVO myfoodVO = new MyFoodVO();
-			myfoodVO.setMf_date(mf_date);
-			myfoodVO.setMf_pcode(mf_code);
-			myfoodVO.setMf_intake(mf_intake);
-			int result = mfService.insert(myfoodVO);
-			if (result > 0) {
-				resp.sendRedirect("/food");
+				MyFoodVO myfoodVO = new MyFoodVO();
+				myfoodVO.setMf_date(mf_date);
+				myfoodVO.setMf_pcode(mf_code);
+				myfoodVO.setMf_intake(mf_intake);
+				int result = mfService.insert(myfoodVO);
+				if (result > 0) {
+					resp.sendRedirect("/food");
+				} else {
+					req.getRequestDispatcher("/WEB-INF/views/exception.jsp").forward(req, resp);
+				}
+			} catch (NumberFormatException e) {
+				req.getRequestDispatcher("/WEB-INF/views/exception.jsp").forward(req, resp);
 			}
 		}
 	}

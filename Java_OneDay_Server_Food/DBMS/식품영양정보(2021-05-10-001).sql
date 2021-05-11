@@ -69,7 +69,7 @@ CREATE TABLE tbl_myfoods(
 );
 
 DELETE FROM tbl_myfoods
-WHERE mf_date = '50';
+WHERE mf_intake = 3;
 
 ALTER TABLE tbl_myfoods
 ADD CONSTRAINT fk_foods

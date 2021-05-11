@@ -9,9 +9,9 @@
 <body>
 	<h4>조회하려는 날짜를 입력하세요</h4>
 	<form method="POST">
-		<input name="mf_year"/>년
-		<input name="mf_month"/>월
-		<input name="mf_day"/>일
+		<input name="mf_year" maxlength="4" required/>년
+		<input name="mf_month" maxlength="2" required/>월
+		<input name="mf_day" maxlength="2" required/>일
 		<button>조회</button>
 	</form>
 	

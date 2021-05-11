@@ -40,7 +40,7 @@ public class LookupController extends HttpServlet {
 			mf_month = String.format("%02d", Integer.valueOf(req.getParameter("mf_month")));
 			mf_day = String.format("%02d", Integer.valueOf(req.getParameter("mf_day")));
 		} catch (NumberFormatException e) {
-			req.getRequestDispatcher("/WEB-INF/views/lookup2.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/exception.jsp").forward(req, resp);
 		}
 		String mf_date = String.format(mf_year + "-" + mf_month + "-" + mf_day);
 		List<MyFoodDTO> mfList = mfService.findByDate(mf_date);
