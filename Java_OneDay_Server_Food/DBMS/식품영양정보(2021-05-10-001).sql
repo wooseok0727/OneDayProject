@@ -15,7 +15,6 @@ CREATE TABLE tbl_foods(
     f_sugars	    NUMBER		
 );
 
-
 CREATE TABLE tbl_company(
     c_code	CHAR(6)		    PRIMARY KEY,
     c_name	nVARCHAR2(125)	NOT NULL	
@@ -26,9 +25,7 @@ CREATE TABLE tbl_items(
     t_name	nVARCHAR2(30)	NOT NULL	
 );
 
-SELECT COUNT(*) FROM tbl_foods;
-SELECT COUNT(*) FROM tbl_company;
-SELECT COUNT(*) FROM tbl_items;
+
 
 ALTER TABLE tbl_foods
 ADD CONSTRAINT fk_company
@@ -39,6 +36,8 @@ ALTER TABLE tbl_foods
 ADD CONSTRAINT fk_items
 FOREIGN KEY(f_tcode)
 REFERENCES tbl_items(t_code);
+
+
 
 CREATE VIEW view_식품정보 AS
 (
@@ -61,6 +60,9 @@ CREATE VIEW view_식품정보 AS
             ON F.f_tcode = T.t_code
 );
 
+
+
+
 CREATE TABLE tbl_myfoods(
     mf_seq	    NUMBER		PRIMARY KEY,
     mf_date	    CHAR(10)	NOT NULL,	
@@ -68,8 +70,6 @@ CREATE TABLE tbl_myfoods(
     mf_intake	NUMBER	    NOT NULL	
 );
 
-DELETE FROM tbl_myfoods
-WHERE mf_intake = 3;
 
 ALTER TABLE tbl_myfoods
 ADD CONSTRAINT fk_foods
@@ -81,10 +81,6 @@ CREATE SEQUENCE seq_myfoods
 START WITH 1
 INCREMENT BY 1;
 
-INSERT INTO tbl_myfoods
-VALUES(seq_myfoods.NEXTVAL,'2021-05-19','PD00001',3);
-
-DROP VIEW view_식품섭취정보;
 
 CREATE VIEW view_식품섭취정보 AS
 (
@@ -102,5 +98,3 @@ CREATE VIEW view_식품섭취정보 AS
         LEFT JOIN tbl_foods F
             ON M.mf_pcode = F.f_code
 );            
-
-
